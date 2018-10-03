@@ -29,8 +29,6 @@ PaymentMethodView.prototype._initialize = function () {
 
   addSelectionEventHandler(this.element, this._choosePaymentMethod.bind(this));
 
-  html = html.replace(/@DISABLE_MESSAGE/g, this.strings.hasSubscription);
-
   switch (this.paymentMethod.type) {
     case paymentMethodTypes.applePay:
       html = html.replace(/@ICON/g, 'logoApplePay')
@@ -81,14 +79,10 @@ PaymentMethodView.prototype.setActive = function (isActive) {
 
 PaymentMethodView.prototype.enableEditMode = function () {
   classlist.add(this.checkMark, 'braintree-hidden');
-  if (this.paymentMethod.hasSubscription) {
-    classlist.add(this.element, 'braintree-method--disabled');
-  }
 };
 
 PaymentMethodView.prototype.disableEditMode = function () {
   classlist.remove(this.checkMark, 'braintree-hidden');
-  classlist.remove(this.element, 'braintree-method--disabled');
 };
 
 PaymentMethodView.prototype._choosePaymentMethod = function () {
